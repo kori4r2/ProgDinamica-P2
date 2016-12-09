@@ -1,10 +1,13 @@
 // Ítalo Tobler Silva - nUSP 8551910
-#include "myStrings.hpp"
+#include "myStrings.h"
 
 // Aloca a memoria necessaria para criar uma copia da string passada como argumento
 char *myStrdup(char *string){
+	if(string == NULL) return NULL;
+
 	char *duplicate = (char*)malloc(sizeof(char) * (strlen(string) + 1));
 	if(duplicate == NULL) return NULL;
+
 	strcpy(duplicate, string);
 	return duplicate;
 }
@@ -16,12 +19,15 @@ char *getWord(FILE *stream){
 	char *word = NULL;
 	int size = 0;
 
+	// ignora caracteres nao alfanumericos
 	do{
 		input = fgetc(stream);
 	}while(input != EOF && !isalnum(input));
+	// se nao houver caracteres alfanumericos, retorna NULL
 	if(input == EOF){
 		return NULL;
 	}
+
 	do{
 		word = (char*)realloc(word, sizeof(char) * (size+1));
 		word[size++] = input;
@@ -56,12 +62,13 @@ char *myGetLine(FILE *stream){
 
 // Funciona da mesma maneira que myGetLine, mas possui um tamanho maximo e aloca a string com esse tamanho obrigatoriamente
 char *readLimitedString(FILE *stream, int maxSize){
-	char *string = (char*)malloc(sizeof(char) * maxSize);
-	memset(string, 0, sizeof(char) * maxSize);
+	char *string = (char*)malloc(sizeof(char) * (maxSize + 1));
 	if(string == NULL){
 		fprintf(stderr, "readLimitedString(): error allocating memory\n");
 		return NULL;
 	}
+	memset(string, 0, sizeof(char) * (maxSize + 1));
+
 	char input;
 	int size = 0;
 
