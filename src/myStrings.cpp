@@ -1,5 +1,5 @@
 // Ítalo Tobler Silva - nUSP 8551910
-#include "myStrings.h"
+#include "myStrings.hpp"
 
 // Aloca a memoria necessaria para criar uma copia da string passada como argumento
 char *myStrdup(char *string){
@@ -19,11 +19,11 @@ char *getWord(FILE *stream){
 	char *word = NULL;
 	int size = 0;
 
-	// ignora caracteres nao alfanumericos
+	// ignora caracteres invalidos
 	do{
 		input = fgetc(stream);
-	}while(input != EOF && !isalnum(input));
-	// se nao houver caracteres alfanumericos, retorna NULL
+	}while(input != EOF && input == '\t' && input == '\r' && input == '\n');
+	// se nao houver caracteres validos, retorna NULL
 	if(input == EOF){
 		return NULL;
 	}
@@ -32,7 +32,7 @@ char *getWord(FILE *stream){
 		word = (char*)realloc(word, sizeof(char) * (size+1));
 		word[size++] = input;
 		input = fgetc(stream);
-	}while(input != ' ' && input != '\n' && input != EOF);
+	}while(input != ' ' && input != '\n' && input != '\t' && input != '\r' && input != EOF);
 	word = (char*)realloc(word, sizeof(char) * (size+1));
 	word[size] = '\0';
 	return word;
@@ -46,7 +46,7 @@ char *myGetLine(FILE *stream){
 
 	do{
 		input = fgetc(stream);
-	}while(input != EOF && !isalnum(input));
+	}while(input != EOF && input == '\t' && input == '\r' && input == '\n');
 	if(input == EOF){
 		return NULL;
 	}
@@ -54,7 +54,7 @@ char *myGetLine(FILE *stream){
 		string = (char*)realloc(string, sizeof(char) * (size+1));
 		string[size++] = input;
 		input = fgetc(stream);
-	}while(input != '\n' && input != EOF);
+	}while(input != '\n' && input != '\r' && input != EOF);
 	string= (char*)realloc(string, sizeof(char) * (size+1));
 	string[size] = '\0';
 	return string;
@@ -74,14 +74,14 @@ char *readLimitedString(FILE *stream, int maxSize){
 
 	do{
 		input = fgetc(stream);
-	}while(input != EOF && !isalnum(input));
+	}while(input != EOF && input == '\t' && input == '\r' && input == '\n');
 	if(input == EOF){
 		return NULL;
 	}
 	do{
 		if(size < maxSize-1) string[size++] = input;
 		input = fgetc(stream);
-	}while(input != '\n' && input != EOF);
+	}while(input != '\n' && input != '\r' && input != EOF);
 	string[size] = '\0';
 	return string;
 }
