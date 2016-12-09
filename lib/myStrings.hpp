@@ -6,8 +6,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-using namespace std;
-
 char *myStrdup(char*);
 char *getWord(FILE*);
 char *readLimitedString(FILE*, int);
