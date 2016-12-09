@@ -9,7 +9,7 @@ void wordWrapper::printSolution(){
 	while((i < _N) && (cost > 0)){
 		if(_cost[i] == cost){
 			std::cout << _solution[i];
-			cost -= ((strlen(_solution[i]) - 1) * (strlen(_solution[i]) - 1));
+			cost -= ( (_L - (strlen(_solution[i]) - 1)) * (_L - (strlen(_solution[i]) - 1)) );
 		}
 		i++;
 	}
@@ -45,7 +45,9 @@ void wordWrapper::wrapSquaresSum(){ // Realiza o word wrap utilizando soma de qu
 				// E armazena a string correspondente a linha completa
 				_solution[i] = (char*)realloc(_solution[i], sizeof(char) * (size+2));
 				_solution[i][0] = '\0';
-				for(int k = 0; k <= j; k++){
+				strcat(_solution[i], _wordList[i]);
+				for(int k = 1; k <= j; k++){
+					strcat(_solution[i], " ");
 					strcat(_solution[i], _wordList[i+k]);
 				}
 				_solution[i][size] = '\n';

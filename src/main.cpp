@@ -14,14 +14,9 @@ int main(int argc, char *argv[]){
 	wordList = (char**)malloc(sizeof(char*) * N);
 
 	// Le as palavras da entrada padrao
-	std::cout << "----------------------\n";
 	for(i = 0; i < N; i++){
 		wordList[i] = myGetLine(stdin);
-		std::cout << "||";
-		std::cout << wordList[i];
-		std::cout << "||\n";
 	}
-	std::cout << "----------------------\n";
 
 	// Cria o wordWrapper
 	wordWrapper *wrapper = new wordWrapper(N, L, wordList);
