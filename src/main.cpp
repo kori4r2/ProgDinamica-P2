@@ -9,20 +9,25 @@ int main(int argc, char *argv[]){
 	char **wordList;
 
 	// Le os valores de L e N
-	cin >> L >> N;
+	std::cin >> L >> N;
 	// Aloca a memoria necessaria para armazenar as palavras
 	wordList = (char**)malloc(sizeof(char*) * N);
 
 	// Le as palavras da entrada padrao
+	std::cout << "----------------------\n";
 	for(i = 0; i < N; i++){
 		wordList[i] = myGetLine(stdin);
+		std::cout << "||";
+		std::cout << wordList[i];
+		std::cout << "||\n";
 	}
+	std::cout << "----------------------\n";
 
 	// Cria o wordWrapper
 	wordWrapper *wrapper = new wordWrapper(N, L, wordList);
 
 	// Escreve na saida o resultado do word wrap utilizando minima soma de quadrados
-	cout << wrapper->wrapSquaresSum() << '\n';
+	wrapper->wrapSquaresSum();
 
 	// Libera a memoria alocada
 	delete(wrapper);

@@ -22,7 +22,7 @@ char *getWord(FILE *stream){
 	// ignora caracteres invalidos
 	do{
 		input = fgetc(stream);
-	}while(input != EOF && input == '\t' && input == '\r' && input == '\n');
+	}while(input != EOF && (input == '\t' || input == '\r' || input == '\n'));
 	// se nao houver caracteres validos, retorna NULL
 	if(input == EOF){
 		return NULL;
@@ -46,7 +46,7 @@ char *myGetLine(FILE *stream){
 
 	do{
 		input = fgetc(stream);
-	}while(input != EOF && input == '\t' && input == '\r' && input == '\n');
+	}while(input != EOF && (input == '\t' || input == '\r' || input == '\n'));
 	if(input == EOF){
 		return NULL;
 	}
@@ -74,7 +74,7 @@ char *readLimitedString(FILE *stream, int maxSize){
 
 	do{
 		input = fgetc(stream);
-	}while(input != EOF && input == '\t' && input == '\r' && input == '\n');
+	}while(input != EOF && (input == '\t' || input == '\r' || input == '\n'));
 	if(input == EOF){
 		return NULL;
 	}
