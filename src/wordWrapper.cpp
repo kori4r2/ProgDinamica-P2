@@ -7,7 +7,7 @@ void wordWrapper::printSolution(){
 	int cost = _cost[0];
 	int wordCount = _N;
 	// Percorre os vetores de memoizacao
-	for(int i = 0; (i < _N) && (cost >= 0); i++){
+	for(int i = 0; (i < _N) && (cost >= 0) && wordCount > 0; i++){
 		// Se o elemento tiver custo total e numero de palavras restantes igual ao atual, ele faz parte da resposta final e deve ser impresso
 		if(_cost[i] == cost && wordCount == _totalWordCount[i]){
 			// Imprime a solucao encontrada e atualiza os valores das variaveis
